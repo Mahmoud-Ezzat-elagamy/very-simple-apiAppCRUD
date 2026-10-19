@@ -1,0 +1,19 @@
+## .NET build output
+bin/
+obj/
+
+## Runtime logs
+logs/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Visual Studio Code
+.vscode/
+
+## Operating system files
+.DS_Store
+Thumbs.db

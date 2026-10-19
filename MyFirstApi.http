@@ -1,0 +1,222 @@
+@host = http://localhost:5270
+@token = 1234
+
+###
+GET {{host}}/error
+
+
+
+############################################################
+# GET ALL USERS - SUCCESS
+############################################################
+
+GET {{host}}/api/users
+Accept: application/json
+x-token-security: {{token}}
+
+###
+
+############################################################
+# GET USER BY ID - SUCCESS
+############################################################
+
+GET {{host}}/api/users/1
+Accept: application/json
+x-token-security: {{token}}
+
+###
+
+############################################################
+# GET USER BY ID - USER NOT FOUND
+############################################################
+
+GET {{host}}/api/users/999
+Accept: application/json
+x-token-security: {{token}}
+
+###
+
+############################################################
+# GET USER BY ID - INVALID ID
+############################################################
+
+GET {{host}}/api/users/0
+Accept: application/json
+x-token-security: {{token}}
+###
+
+############################################################
+# CREATE USER - SUCCESS
+############################################################
+
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "firstName": "Ahmed",
+  "lastName": "Ali",
+  "email": "ahmed.ali@example.com"
+}
+
+###
+
+############################################################
+# CREATE USER - MISSING FIRST NAME
+############################################################
+
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "firstName": "",
+  "lastName": "Ali",
+  "email": "ahmed.ali@example.com"
+}
+
+###
+
+############################################################
+# CREATE USER - MISSING LAST NAME
+############################################################
+
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "firstName": "Ahmed",
+  "lastName": "",
+  "email": "ahmed.ali@example.com"
+}
+
+###
+
+############################################################
+# CREATE USER - INVALID EMAIL
+############################################################
+
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "firstName": "Ahmed",
+  "lastName": "Ali",
+  "email": "not-an-email"
+}
+
+###
+
+############################################################
+# CREATE USER - DUPLICATE EMAIL
+############################################################
+
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Duplicate",
+  "email": "john.doe@example.com"
+}
+
+###
+
+############################################################
+# UPDATE USER - SUCCESS
+############################################################
+
+PUT {{host}}/api/users/1
+Content-Type: application/json
+
+{
+  "firstName": "John Updated",
+  "lastName": "Doe Updated",
+  "email": "john.updated@example.com"
+}
+
+###
+
+############################################################
+# UPDATE USER - USER NOT FOUND
+############################################################
+
+PUT {{host}}/api/users/999
+Content-Type: application/json
+
+{
+  "firstName": "Ghost",
+  "lastName": "User",
+  "email": "ghost@example.com"
+}
+
+###
+
+############################################################
+# UPDATE USER - INVALID EMAIL
+############################################################
+
+PUT {{host}}/api/users/1
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "invalid-email"
+}
+
+###
+
+############################################################
+# UPDATE USER - EMPTY FIRST NAME
+############################################################
+
+PUT {{host}}/api/users/1
+Content-Type: application/json
+
+{
+  "firstName": "",
+  "lastName": "Doe",
+  "email": "john@example.com"
+}
+
+###
+
+############################################################
+# UPDATE USER - DUPLICATE EMAIL
+############################################################
+
+PUT {{host}}/api/users/1
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "jane.smith@example.com"
+}
+
+###
+
+############################################################
+# DELETE USER - SUCCESS
+############################################################
+
+DELETE {{host}}/api/users/2
+
+###
+
+############################################################
+# DELETE USER - USER NOT FOUND
+############################################################
+
+DELETE {{host}}/api/users/999
+
+###
+
+############################################################
+# DELETE USER - INVALID ID
+############################################################
+
+DELETE {{host}}/api/users/0
+
+###
+
+GET {{host}}/api/stats
